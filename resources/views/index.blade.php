@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="jumbotron col-md-12 col-xs-12 shadow">
+<div class="jumbotron col-md-12 col-xs-12 ">
     <div class="division">
         <h1 class="title"><strong>Scegli la tua esperienza</strong></h1>
         <p class="text-center">Cambia quadro. Scopri alloggi nelle vicinanze <br> tutti da vivere, per lavoro o svago.</p>
@@ -11,7 +11,7 @@
                 <div class="searchbar">
                     <input id="address-input" class="search_input" type="text" name="" placeholder="Search...">
                     <a id="bottone" href="{{route('search')}}" class="search_icon"><i class="fas fa-search"></i></a>
-                    
+
                 </div>
             </div>
         </div>
@@ -34,8 +34,7 @@
             @endphp
             @foreach ($sponsors as $sponsor)
             @foreach ($sponsor -> flats as $flat)
-            @if ($flat -> disactive == 0 && $flat -> deleted == 0 && $count
-            < 6) @php
+            @if ($flat -> disactive == 0 && $flat -> deleted == 0 && $count< 6) @php
             $count +=1;
             @endphp
             <div class="col-xs-12 col-lg-4 text-center" style="margin-bottom:20px;">

@@ -446,9 +446,6 @@ class UserController extends Controller
               if ($from_date2hour == $data_hour_now) {
                 $hour = intval(Carbon::parse($message['created_at'])-> format('H'));
                 $dataMessages[$hour] +=1;
-              }else {
-                $hour = intval(Carbon::parse($message['created_at'])-> format('H'));
-                $dataMessages[$hour] +=1;
               }
             }
         }

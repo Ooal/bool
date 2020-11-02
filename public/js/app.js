@@ -49579,7 +49579,12 @@ function init() {
   document.cookie = "city=";
   document.cookie = "distance=";
   autocompletesearch();
-  setDistance();
+  setDistance(); //Menu Toggle Script
+
+  $("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
 }
 
 /***/ }),
@@ -49647,8 +49652,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\enric\Desktop\BoolBNB_27_10_-PagaBranch\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\enric\Desktop\BoolBNB_27_10_-PagaBranch\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\enric\Desktop\backup\BoolBNB_27_10_-PagaBranch\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\enric\Desktop\backup\BoolBNB_27_10_-PagaBranch\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

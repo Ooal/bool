@@ -53,11 +53,21 @@ function setDistance(){
 
 
 function init() {
+
+
     document.cookie = `lat=${""}`;
     document.cookie = `long=${""}`;
     document.cookie = `city=${""}`;
     document.cookie = `distance=${""}`;
+
+
+
       autocompletesearch();
       setDistance();
 
+      //Menu Toggle Script
+        $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+        });
     }

@@ -21,12 +21,38 @@ class GuestController extends Controller
     public function index(){
         $flats = Flat::all();
         $sponsors = Sponsor::all();
+
+
+          /*foreach ($sponsors as $sponsor) {
+            $sponsorId = $sponsor-> id;
+            $flatsn = Flat::leftJoin('flat_sponsor', function($join) use ($sponsorId){
+            $join->on('flats.id', '=', 'flat_sponsor.flat_id');
+            $join->on('flat_sponsor.sponsor_id', '=', \DB::raw("'".$sponsorId."'"));
+            })->whereNull('flat_sponsor.flat_id')->get();
+          }*/
+          /*foreach ($flats as $flat) {
+            $id = $flat-> id;
+            $flatsn = Flat::with('sponsors')->whereDoesntHave('sponsors', function($query) use ($id) {
+            $query->where('sponsor_id', $id);
+            })->get();
+          }*/
+        //   $latitude = 45.0677;
+        //   $longitude = 7.6824;
+        //
+        //   foreach ($flats as $flat) {
+        //     $id = $flat-> id;
+        //     $lat = $flat-> latitude;
+        //     $long = $flat-> longitude;
+        //     $dist = (3958*3.1415926*sqrt(($lat-$latitude)*($lat-$latitude) + cos($lat/57.29578)*cos($latitude/57.29578)*($long-$longitude)*($long-$longitude))/180);
+        //     $flatsn = Flat::with('sponsors')->whereDoesntHave('sponsors', function($query) use ($id) {$query->where('flat_id', '!=', $id);})->get();
+        //
+        // }
+
         return view('index', compact('flats','sponsors'));
     }
 
 
     public function search(){
-
       $sponsors = Sponsor::all();
       $services = Service::all();
       $flats = Flat::all();
@@ -39,19 +65,23 @@ class GuestController extends Controller
       else {
         $distance = $_COOKIE['distance'];
       }
-
       if (!(empty($latitude))) {
-          $city = $_COOKIE['city'];
-        $flatselect = Flat::select(DB::raw('*, ( 6367 * acos( cos( radians('.$latitude.') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('.$longitude.') ) + sin( radians('.$latitude.') ) * sin( radians( latitude ) ) ) ) AS distance'))
-      ->having('distance', '<', $distance)
-      ->orderBy('distance')
-      ->get();
+        $city = $_COOKIE['city'];
+        foreach ($flats as $flat) {
+          $id = $flat-> id;
+        $flatsNoSponsor = Flat::with('sponsors')->whereDoesntHave('sponsors', function($query) use ($id) {$query->where('flat_id', '!=', $id);})->get();
+        $flatsSponsor = Flat::with('sponsors')->whereHas('sponsors', function($query) use ($id) {$query->where('flat_id', '!=', $id);})->get();
+        }
       }
       else {
-        $flatselect = Flat::all();
+        foreach ($flats as $flat) {
+          $id = $flat-> id;
+        $flatsNoSponsor = Flat::with('sponsors')->whereDoesntHave('sponsors', function($query) use ($id) {$query->where('flat_id', '!=', $id);})->get();
+        $flatsSponsor = Flat::with('sponsors')->whereHas('sponsors', function($query) use ($id) {$query->where('flat_id', '!=', $id);})->get();
+        }
       }
 
-        return view('search', compact('flats','sponsors', 'services','city','flatselect'));
+        return view('search', compact('flatsNoSponsor','flatsSponsor','sponsors', 'services','city','latitude','longitude','distance','flats'));
     }
 
     public function searchsort(request $request){
