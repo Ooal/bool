@@ -31,3 +31,5 @@ Route::get('/showMessage/{id}', 'UserController@showMessage')->name('message');
 Route::get('/update/{id}', 'UserController@update')->name('update');
 Route::post('/editFlat/{id}', 'UserController@editFlat')->name('editFlat');
 Route::get('/stats/{id}', 'UserController@showStats')->name('showStats');
+Route::get('/storePhoto/{id}', 'UserController@photo')->name('photo');
+Route::post('/storePhoto/{id}', 'UserController@storePhoto')->name('storePhoto');

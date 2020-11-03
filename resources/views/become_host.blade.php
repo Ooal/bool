@@ -10,7 +10,7 @@
                   style="text-align:center; color:#ffff; font-weight:bold background: rgb(131,58,180);background: linear-gradient(90deg, rgba(131,58,180,0.6671043417366946) 0%, rgba(253,29,29,0.7287289915966386) 50%, rgba(252,176,69,0.6502976190476191) 100%);">
                     Inserisci il tuo appartamento.</div>
 
-
+                {{-- enctype="multipart/form-data" serve per codificare la request in modo che legga file di upload --}}
                 <div class="card-body">
                     <form action="{{route('storeHost', Auth::user()-> id)}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -117,7 +117,7 @@
                         </div>
 
 
-
+                        {{-- inputs in display none per effettuare la richiesta in autocomplete dell'indirizzi restituendo come valore la lat e long prendendo tutto da con riferomento a riga 27/28 dell'app_outform.js--}}
                         <input id="latitude" type="text" name="latitude" class="form-control none" value="" ondblclick="this.value=''">
                         <input id="longitude" type="text" name="longitude" class="form-control none" value="" ondblclick="this.value=''">
                         <button type="submit" class="btn btn-success btn-block">Inserisci il tuo Appartamento</button>

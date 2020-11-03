@@ -41,15 +41,6 @@
                             @enderror
                         </div>
 
-                        {{-- <div class="servizi-check">
-                           <ul class="ks-cboxtags">
-                             @foreach ($services as $service)
-                               <li><input type="checkbox" id="{{$service -> service_name}}" name="{{$service -> service_name}}" class="form-check-input" id="{{$service -> id}}" value="{{$service -> id}}">
-                        <label class="form-check-label" for="{{$service -> service_name}}">{{$service-> service_name}} </label></li>
-                        @endforeach
-                        </ul>
-                </div> --}}
-
                 <div class="form-group" style="padding-top:1rem;">
                     <label for="price_at_night">Prezzo a notte</label>
                     <input type="number" name="price_at_night" class="form-control @error('price_at_night') is-invalid @enderror" value="{{$flat -> price_at_night}}" ondblclick="this.value=''">

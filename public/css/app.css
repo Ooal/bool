@@ -11426,9 +11426,8 @@ footer #iconaMondo {
 
 .filter-button {
   position: absolute;
-  top: 74px;
-  width: 138px;
-  left: 200px;
-  transform: rotate(90deg);
+  top: 5px;
+  width: 80px;
+  left: 114%;
 }
 

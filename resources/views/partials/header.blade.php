@@ -29,9 +29,15 @@
                 @auth
 
                 <li class="nav-item dropdown">
+                    @if (empty(Auth::user()->name))
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->email }}
+                    </a>                        
+                    @else
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
                     </a>
+                    @endif
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('profile')}} ">Account</a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -49,7 +55,8 @@
                 @endphp
 
                 @foreach ($flats as $flat)
-                @if ( !(empty($flat -> user_id)) && (($flat -> user_id) == (Auth::user()-> id)) && $ishost == 0 )
+                {{-- se l'user_id NON è vuoto e l'user_id del flat è ugale all'id dell'utente collegato e non è un host --}}
+                @if ( !(empty($flat -> user_id)) && (($flat -> user_id) == (Auth::user()-> id)) && $ishost == 0 ) 
                 @php
                 $ishost = 1;
                 @endphp

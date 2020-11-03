@@ -212,7 +212,7 @@ function init() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\enric\Desktop\backup\BoolBNB_27_10_-PagaBranch\resources\js\app_map.js */"./resources/js/app_map.js");
+module.exports = __webpack_require__(/*! /home/grey/bool/resources/js/app_map.js */"./resources/js/app_map.js");
 
 
 /***/ })

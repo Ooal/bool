@@ -152,7 +152,7 @@ function sendRequestSearch() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\enric\Desktop\backup\BoolBNB_27_10_-PagaBranch\resources\js\sort.js */"./resources/js/sort.js");
+module.exports = __webpack_require__(/*! /home/grey/bool/resources/js/sort.js */"./resources/js/sort.js");
 
 
 /***/ })

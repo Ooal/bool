@@ -7,9 +7,15 @@
         <div class="col-md-12">
             <div>
                 <h1 style="padding-bottom: 15px;">Account</h1>
-                <p><strong>Nome</strong> {{Auth::user()->name}} </p>
-                <p><strong>Cognome</strong> {{Auth::user()->lastname}} </p>
-                <p><strong>Data di nascita</strong> {{Auth::user()->date_of_birth}} </p>
+                @if (isset(Auth::user()->name))
+                  <p><strong>Nome</strong> {{Auth::user()->name}} </p>
+                @endif
+                @if (isset(Auth::user()->lastname))
+                  <p><strong>Cognome</strong> {{Auth::user()->lastname}} </p>
+                @endif
+                @if (isset(Auth::user()->date_of_birth))
+                  <p><strong>Data di nascita</strong> {{Auth::user()->date_of_birth}} </p>
+                @endif
                 <p><strong>Email</strong> {{Auth::user()->email}} </p>
             </div>
         </div>
@@ -45,25 +51,40 @@
                 <div class="col-xs-12 col-md-4 blocco-flat" style="position:relative;">
                     <div id="carouselExampleControls{{$flat -> id}}" class="carousel slide" data-interval="false" style="border-radius:10px; margin-bottom: 10px;">
                         <div class="carousel-inner">
+
                             <div class="carousel-item active" style="height: 250px;">
                                 <img src=" {{asset($flat -> photo_url)}}" alt="">
                             </div>
-                            <div class="carousel-item" style="height: 250px;">
-                                <img src=" {{asset($flat -> photo_url)}}" alt="">
-                            </div>
-                            <div class="carousel-item" style="height: 250px;">
-                                <img src=" {{asset($flat -> photo_url)}}" alt="">
-                            </div>
+
+                              @php
+                                $i = 0 ;
+                              @endphp
+                              @foreach ($photos as $photo)
+                              @if ($photo -> flat_id == $flat -> id)
+                                <div class="carousel-item" style="height: 250px;">
+                                <img src=" {{asset($photo -> photo_url)}}" alt="">
+                                </div>
+                                @php
+                                  $i = 1 ;
+                                @endphp
+                              @endif
+                              @endforeach
+
+
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls{{$flat -> id}}" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls{{$flat -> id}}" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        @if ($i == 1)
+                          <a class="carousel-control-prev" href="#carouselExampleControls{{$flat -> id}}" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleControls{{$flat -> id}}" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                          </a>
+                        @endif
+
                         @php
+                        // controllare sempre se esiste contenuto nella tabella ponte prima di eseguire il pivot
                         $exist = isset($flat-> sponsors-> first()-> pivot-> flat_id);
                         @endphp
                         @if (!($exist))
@@ -72,6 +93,9 @@
                         <div class="shadow" style="background-color: #ffff;border-radius: 5px;border: solid 1px #343a40 ;position: absolute;top: 13px;left: 13px;width:109px;height:25px;">
                             <p style="color: black;text-align:center;">Sponsorizzato</p>
                         </div>
+                        @endif
+                        @if ($i == 0)
+                          <a style="position: absolute;top: 7px;right: 14px;font-size: 30px;color: #fff;"href="{{route('photo', $flat -> id)}}"><i class="fas fa-images"></i></a>
                         @endif
                     </div>
                 </div>

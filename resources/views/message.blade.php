@@ -11,13 +11,23 @@
                         <div class="carousel-item active" style="height: 350px;">
                             <img src=" {{asset($flat -> photo_url)}}" alt="">
                         </div>
-                        <div class="carousel-item" style="height: 350px;">
-                            <img src=" {{asset($flat -> photo_url)}}" alt="">
-                        </div>
-                        <div class="carousel-item" style="height: 350px;">
-                            <img src=" {{asset($flat -> photo_url)}}" alt="">
-                        </div>
-                    </div>
+                        @php
+                          $i = 0 ;
+                        @endphp
+                        @foreach ($photos as $photo)
+                        @if ($photo -> flat_id == $flat -> id)
+                          <div class="carousel-item" style="height: 350px;">
+                          <img src=" {{asset($photo -> photo_url)}}" alt="">
+                          </div>
+                          @php
+                            $i = 1 ;
+                          @endphp
+                        @endif
+                        @endforeach
+
+
+                  </div>
+
                     <a class="carousel-control-prev" href="#carouselExampleControls{{$flat -> id}}" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -26,6 +36,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
+            
                 </div>
             </div>
         </a>

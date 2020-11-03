@@ -9,6 +9,8 @@
     {{ session('status') }}
 </div>
 @endif
+
+{{-- inizio carousel --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-xs-12 col-md-12">
@@ -19,12 +21,20 @@
                         <div class="carousel-item active">
                             <img class="d-block w-100" src="{{ asset($flat-> photo_url)}}" alt="First slide">
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{ asset($flat-> photo_url)}}" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{ asset($flat-> photo_url)}}" alt="Third slide">
-                        </div>
+                        @php
+                          $i = 0 ;
+                        @endphp
+                        @foreach ($photos as $photo)
+                        @if ($photo -> flat_id == $flat -> id)
+                          <div class="carousel-item" >
+                          <img class="d-block w-100" src=" {{asset($photo -> photo_url)}}" alt="">
+                          </div>
+                          @php
+                            $i = 1 ;
+                          @endphp
+                        @endif
+                        @endforeach
+
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -38,11 +48,16 @@
             </a>
         </div>
     </div>
+        {{-- fine carousel --}}
 
-
+    {{-- parte di descrizione appartamento --}}
     <div class="container carousel" style="background-color : rgba(255, 99, 132, 0)">
         <div class="row justify-content-center">
             @auth
+            {{-- cambio di layout in base al tipo di utente (Host - User - Guest) --}}
+            {{-- se sei Guest vedi il form + email --}}
+            {{-- se sei User/Host non proprietario, vedi form ma non l'email --}}
+            {{-- se sei il proprietario non mostra il form --}}
             @if (($flat-> user_id) == (Auth::user()->id))
             <div class="col-xs-12">
 
@@ -51,6 +66,13 @@
 
                 <div class="divisore"></div>
                 <div class="row">
+                    <div class="col-md-1 logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="col-md-11 scritte">
+                        <h4>Address</h4>
+                        <h5>{{$flat -> address}}</h5>
+                    </div>
                     <div class="col-md-1 logo">
                         <i class="fas fa-home"></i>
                     </div>
@@ -119,6 +141,7 @@
                     </div>
                 </div>
 
+
             </div>
             @else
             <div class="col-xs-12 col-md-8">
@@ -128,6 +151,13 @@
 
                 <div class="divisore"></div>
                 <div class="row">
+                    <div class="col-md-1 logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="col-md-11 scritte">
+                        <h4>Address</h4>
+                        <h5>{{$flat -> address}}</h5>
+                    </div>
                     <div class="col-md-1 logo">
                         <i class="fas fa-home"></i>
                     </div>
@@ -207,6 +237,13 @@
 
                 <div class="divisore"></div>
                 <div class="row">
+                    <div class="col-md-1 logo">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="col-md-11 scritte">
+                        <h4>Address</h4>
+                        <h5>{{$flat -> address}}</h5>
+                    </div>
                     <div class="col-md-1 logo">
                         <i class="fas fa-home"></i>
                     </div>
